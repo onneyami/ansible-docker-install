@@ -1,0 +1,12 @@
+.vagrant/
+*.log
+*.retry
+inventory/production/group_vars/all/vault.yml
+!inventory/production/group_vars/all/vault.yml.example
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

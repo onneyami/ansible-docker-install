@@ -1,0 +1,20 @@
+---
+# Packages for docker
+docker_dependencies:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg
+  - lsb-release
+
+# URL for adding GPG key and repository
+docker_gpg_key_url: "https://download.docker.com/linux/ubuntu/gpg"
+docker_repository: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+
+# Packages of Docker
+docker_packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-buildx-plugin
+  - docker-compose-plugin

@@ -1,0 +1,40 @@
+---
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Install dependencies
+  ansible.builtin.apt:
+    name: "{{ docker_dependencies }}"
+    state: present
+
+- name: Add Docker GPG key
+  ansible.builtin.apt_key:
+    url: "{{ docker_gpg_key_url }}"
+    state: present
+
+- name: Add Docker repository
+  ansible.builtin.apt_repository:
+    repo: "{{ docker_repository }}"
+    state: present
+
+- name: Install Docker packages
+  ansible.builtin.apt:
+    name: "{{ docker_packages }}"
+    state: present
+  notify: restart docker
+
+- name: Ensure Docker is started and enabled
+  ansible.builtin.systemd:
+    name: docker
+    state: started
+    enabled: true
+
+- name: Add users to docker group
+  ansible.builtin.user:
+    name: "{{ item }}"
+    groups: docker
+    append: true
+  loop: "{{ docker_users }}"
+  notify: restart docker

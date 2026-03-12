@@ -1,0 +1,6 @@
+---
+docker_users:
+  - vagrant
+  - ubuntu
+
+docker_compose_version: "2.24.2"
